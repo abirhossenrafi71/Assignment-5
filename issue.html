@@ -40,7 +40,7 @@
 
     <section id="filter-section" class="mt-10 ">
         <div class="w-10/12 mx-auto p-5 flex gap-2 shadow-md rounded-md border-blue-200 border">
-            <button onclick="loadAIssue()" class="btn btn-primary">All</button>
+            <button onclick="loadAIssue()" class="btn active">All</button>
             <button onclick="showOpen()" class="btn ">Open</button>
             <button onclick="showClosed()" class="btn ">Closed</button>
         </div>
@@ -67,11 +67,32 @@
         </div>
     </section>
 
+
+
     <section id="issue-container"
         class="bg-[#EFEFEF] grid grid-cols-1 md:grid-cols-4 sm:grid-cols-2 gap-5 w-10/12 mx-auto shadow-md mt-10 p-5 rounded-md ">
-        
+
 
     </section>
+
+
+    <!-- Open the modal using ID.showModal() method -->
+
+    <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+            <div id="load-modal">
+
+            </div>
+            <div class="modal-action">
+                <form method="dialog">
+                    <!-- if there is a button in form, it will close the modal -->
+                    <button class="btn">Close</button>
+                </form>
+            </div>
+        </div>
+    </dialog>
+
+
     <script src="script/issue.js"></script>
 </body>
 
