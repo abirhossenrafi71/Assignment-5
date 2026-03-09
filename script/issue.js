@@ -41,7 +41,7 @@ const displayIssues = (issues) => {
         const priorityColor = issue.priority === 'high' ? "bg-red-100 text-red-600" : issue.priority === 'medium' ? "bg-yellow-100 text-yellow-600" : "bg-[#EEEFF2] text-[#9CA3AF]";
         const cardDiv = document.createElement('div');
         cardDiv.innerHTML = `
-        <div id="card_details" onclick="loadDisplayModal()" class="border-t-4 bg-white ${borderColor} min-h-[400px] rounded-2xl shadow">
+        <div id="card_details" onclick="loadDisplayModal(${issue.id})" class="border-t-4 bg-white ${borderColor} min-h-[400px] rounded-2xl shadow">
             <div class="space-y-5 p-4">
                 <div class="flex justify-between">
                     <img src="assets/Open-Status.png" alt="" srcset="">
@@ -62,36 +62,41 @@ const displayIssues = (issues) => {
             </div>
         </div>
         `;
-        cardDiv.onclick = function() {
-            loadDisplayModal(issue);
-        }
 
         issueContainer.appendChild(cardDiv);
     });
 }
 
-const loadDisplayModal = () => {
+const loadDisplayModal = async (id) => {
+
+    const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    const issue = data.data;
+
+    const priorityColor = issue.priority === 'high' ? "bg-red-100 text-red-600" : issue.priority === 'medium' ? "bg-yellow-100 text-yellow-600" : "bg-[#EEEFF2] text-[#9CA3AF]";
+
     const loadModal = document.getElementById('load-modal');
-    loadModal.innerHTML =`
+    loadModal.innerHTML = `
         <div class="space-y-5  p-5">
-        <h2 class="font-bold text-xl">Fix broken image uploads</h2>
+        <h2 class="font-bold text-xl">${issue.title}</h2>
         <div class="flex gap-2">
-            <div class="badge badge-success text-white">Success</div>
-            <p class="text-[#64748B]"> • Opened by Fahim Ahmed • 22/02/2026</p>
+            <div class="badge badge-success text-white">${issue.status}</div>
+            <p class="text-[#64748B]"> • Opened by Fahim Ahmed • ${issue.updatedAt}</p>
         </div>
         <div class="flex gap-2">
             <div class="badge badge-soft badge-error border border-error"><i class="fa-solid fa-bug"></i> Bug</div>
             <div class="badge badge-soft badge-warning border border-warning">help wanted</div>
         </div>
-        <p>Lorem ipsum dolor sit amet.</p>
+        <p>${issue.description}</p>
         <div class="bg-[#F8FAFC] p-10 flex">
             <div class="flex-1">
                 <p class="text-[#64748B]">Assigne:</p>
-                <h3 class="font-bold">Fahim Ahmed</h3>
+                <h3 class="font-bold">${issue.author}</h3>
             </div>
             <div>
                 <p class="text-[#64748B]">Priority::</p>
-                <div class="badge badge-soft  ">hello</div>
+                <div class="badge badge-soft  ${priorityColor}">${issue.priority}</div>
             </div>
         </div>
 
