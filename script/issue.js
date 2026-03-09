@@ -66,7 +66,7 @@ const displayIssues = (issues) => {
             <hr class="text-[#EFEFEF]">
             <div class="p-4">
                 <p># ${issue.id} by ${issue.assignee ? issue.assignee : "assignee not found"}</p>
-                <p>${issue.updatedAt}</p>
+                <p>${issue.createdAt}</p>
             </div>
         </div>
         `;
@@ -86,7 +86,7 @@ const loadDisplayModal = async (id) => {
         <h2 class="font-bold text-xl">${issue.title}</h2>
         <div class="flex gap-2">
             <div class="badge badge-success text-white">${issue.status}</div>
-            <p class="text-[#64748B]"> • Opened by ${issue.author} • ${issue.updatedAt}</p>
+            <p class="text-[#64748B]"> • Opened by ${issue.author} • ${issue.createdAt}</p>
         </div>
         <div class="flex gap-2">
             <div class="badge badge-soft badge-error border border-error"><i class="fa-solid fa-bug"></i> Bug</div>
