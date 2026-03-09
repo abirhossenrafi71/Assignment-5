@@ -92,7 +92,7 @@ const loadDisplayModal = async (id) => {
         <div class="bg-[#F8FAFC] p-10 flex">
             <div class="flex-1">
                 <p class="text-[#64748B]">Assigne:</p>
-                <h3 class="font-bold">${issue.author}</h3>
+                <h3 class="font-bold">${issue.assignee}</h3>
             </div>
             <div>
                 <p class="text-[#64748B]">Priority::</p>
@@ -106,7 +106,13 @@ const loadDisplayModal = async (id) => {
 
     document.getElementById('my_modal_5').showModal();
 }
+const searchIssues = async ( ) =>{
+    const inputValue = document.getElementById('input-search').value;
+    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${inputValue}`);
+    const data = await res.json();
+   displayIssues(data.data);
 
+}
 
 
 

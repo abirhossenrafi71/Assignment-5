@@ -7,7 +7,7 @@ document.getElementById("sign-btn").addEventListener('click', function(){
 
     if(userName == "admin" && userPassword == "admin123"){
         alert('✅ Sign in successful!!');
-        window.location.assign("/issue.html");
+        window.location.href="./issue.html";
     }
     else{
         alert("❌ Sign in failed. Invalid username or password.");
